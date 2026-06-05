@@ -308,8 +308,8 @@
     #hero { overflow: hidden; }
     .kiss-gif-bg {
       position: absolute;
-      top: 80%;
-      left: 80%;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
       width: 100vw;
       z-index: 0;
@@ -364,6 +364,19 @@
       color: #c9a0a9;
       margin-top: 18px;
       font-size: 1.05rem;
+    }
+
+    /* ── Responsive corners ───────────────────────── */
+    @media (max-width: 600px) {
+      #capy-corner,
+      #capy-corner-bl {
+        width: 70px;
+      }
+      #corner-bears {
+        width: 72px;
+        bottom: 10px;
+        right: 10px;
+      }
     }
 
     /* ── Footer ────────────────────────────────────── */
@@ -432,7 +445,7 @@
     <div class="event">
       <div class="event-time">8:00 AM - 9:00 AM</div>
       <div class="event-title">Wakey wakey pookie preciosa bootylicious goregous sexy my salvadorian I wanna eat your pupusa let me lick that doe princesa </div>
-      <div class="event-desc">Match Bubu and Dudu + gather picnic small snacks</div>
+      <div class="event-desc">Get ready to match together + gather picnic small snacks</div>
     </div>
 
     <div class="event">
@@ -487,7 +500,7 @@
 <section id="spotify-section">
   <h2>Our Song ✦</h2>
   <div class="spotify-card">
-    <p>Scan the code to listen to the song that means everything.</p>
+    <p>This is our song love!</p>
 
     <a id="spotify-link" href="https://open.spotify.com/track/4pteEcX2rHSJXK8XSOtWP8?si=d12d4c31cd8d454e"
        target="_blank" rel="noopener" title="Open in Spotify">
