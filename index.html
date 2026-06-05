@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy One Year (and one month), My Love 🤍</title>
+  <style>
+    :root {
+      --rose:    #e8496a;
+      --blush:   #f7b8c6;
+      --cream:   #fff8f9;
+      --dark:    #1a0a0f;
+      --mid:     #3d1a24;
+      --gold:    #d4a843;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--dark);
+      color: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ── Floating hearts ───────────────────────────── */
+    #hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .heart {
+      position: absolute;
+      bottom: -60px;
+      font-size: 1.4rem;
+      opacity: 0;
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) rotate(-10deg); opacity: .6; }
+      100% { transform: translateY(-110vh) rotate(10deg); opacity: 0; }
+    }
+
+    /* ── Shared layout ─────────────────────────────── */
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    h2 {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      color: var(--blush);
+      text-align: center;
+      margin-bottom: 36px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid #3d1a2488;
+      margin: 0;
+    }
+
+    /* ── Hero ──────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 20px;
+    }
+
+    #hero .label {
+      font-size: .85rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    #hero h1 {
+      font-size: clamp(2.4rem, 9vw, 5.5rem);
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--blush), var(--rose), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    #hero .sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: #c9a0a9;
+      font-style: italic;
+      max-width: 520px;
+    }
+
+    #hero .date-badge {
+      margin-top: 8px;
+      padding: 8px 24px;
+      border: 1px solid var(--rose);
+      border-radius: 999px;
+      font-size: .9rem;
+      color: var(--blush);
+      letter-spacing: .12em;
+    }
+
+    /* ── Itinerary ─────────────────────────────────── */
+    #itinerary { background: #1e0c13; }
+
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--rose), transparent);
+    }
+
+    .event {
+      position: relative;
+      margin-bottom: 36px;
+    }
+    .event:last-child { margin-bottom: 0; }
+
+    .event::before {
+      content: '♥';
+      position: absolute;
+      left: -30px;
+      top: 3px;
+      color: var(--rose);
+      font-size: .75rem;
+    }
+
+    .event-time {
+      font-size: .75rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .event-title {
+      font-size: 1.15rem;
+      color: var(--blush);
+      margin-bottom: 4px;
+    }
+
+    .event-desc {
+      font-size: .92rem;
+      color: #b08a92;
+      line-height: 1.55;
+    }
+
+    /* ── Spotify ───────────────────────────────────── */
+    #spotify-section {
+      text-align: center;
+    }
+
+    .spotify-card {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      background: #1e0c13;
+      border: 1px solid #3d1a24;
+      border-radius: 20px;
+      padding: 36px 40px;
+    }
+
+    .spotify-card p {
+      color: #c9a0a9;
+      font-style: italic;
+      max-width: 320px;
+      line-height: 1.55;
+    }
+
+    #qr-canvas {
+      border-radius: 12px;
+    }
+
+    .spotify-label {
+      font-size: .75rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+
+    /* ── Photo Album ───────────────────────────────── */
+    #album { background: #1e0c13; }
+
+    .photo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .photo-slot {
+      width: 220px;
+      flex-shrink: 0;
+      aspect-ratio: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #2a0f18;
+      border: 2px dashed #3d1a24;
+      position: relative;
+    }
+    .photo-slot:hover { border-color: var(--rose); }
+
+    .photo-slot img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-slot .add-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #6b3a46;
+      font-size: .8rem;
+      transition: color .2s;
+    }
+    .photo-slot:hover .add-icon { color: var(--rose); }
+    .photo-slot .add-icon span { font-size: 1.8rem; line-height: 1; }
+
+    .photo-slot .remove-btn {
+      display: none;
+      position: absolute;
+      top: 6px; right: 6px;
+      background: rgba(0,0,0,.55);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 26px; height: 26px;
+      font-size: .9rem;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-slot:hover .remove-btn { display: flex; }
+
+
+    /* ── Capy corner (top-left) ──────────────────── */
+    #capy-corner {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 200;
+      width: 110px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,.5);
+      pointer-events: none;
+    }
+
+    /* ── Capy corner bottom-left ─────────────────── */
+    #capy-corner-bl {
+      position: fixed;
+      bottom: 14px;
+      left: 14px;
+      z-index: 200;
+      width: 110px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,.5);
+      pointer-events: none;
+    }
+
+    /* ── Corner bears ─────────────────────────────── */
+    #corner-bears {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      z-index: 200;
+      width: 120px;
+      animation: bearBounce 2.2s ease-in-out infinite;
+      filter: drop-shadow(0 6px 16px rgba(232,73,106,.45));
+      cursor: pointer;
+    }
+    @keyframes bearBounce {
+      0%, 100% { transform: translateY(0) rotate(-4deg) scale(1);   }
+      50%       { transform: translateY(-12px) rotate(4deg) scale(1.04); }
+    }
+    #corner-bears:hover {
+      animation: none;
+      transform: scale(1.15) rotate(0deg);
+      transition: transform .2s;
+    }
+
+    /* ── Kiss GIF background layer ───────────────── */
+    #hero { overflow: hidden; }
+    .kiss-gif-bg {
+      position: absolute;
+      top: 80%;
+      left: 80%;
+      transform: translate(-50%, -50%);
+      width: 100vw;
+      z-index: 0;
+      opacity: 0.13;
+      pointer-events: none;
+    }
+    #hero > *:not(.kiss-gif-bg) {
+      position: relative;
+      z-index: 2;
+    }
+    .click-me-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 28px;
+      border: 2px solid var(--rose);
+      border-radius: 999px;
+      color: var(--rose);
+      text-decoration: none;
+      font-size: .92rem;
+      letter-spacing: .1em;
+      transition: background .25s, color .25s, transform .2s;
+      animation: heartPulse 2.4s ease-in-out infinite;
+    }
+    .click-me-btn:hover {
+      background: var(--rose);
+      color: #fff;
+      transform: scale(1.07);
+      animation: none;
+    }
+    @keyframes heartPulse {
+      0%, 100% { box-shadow: 0 0 0 0   rgba(232,73,106,.45); }
+      50%       { box-shadow: 0 0 0 12px rgba(232,73,106,0);   }
+    }
+
+    /* ── Puuung GIF section ───────────────────────── */
+    #puuung-section {
+      text-align: center;
+      padding: 64px 24px 48px;
+    }
+    .puuung-wrap {
+      display: inline-block;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid #3d1a24;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 0 40px rgba(232,73,106,.18);
+    }
+    .puuung-caption {
+      font-style: italic;
+      color: #c9a0a9;
+      margin-top: 18px;
+      font-size: 1.05rem;
+    }
+
+    /* ── Footer ────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 48px 24px;
+      font-size: .85rem;
+      color: #4a2030;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating hearts canvas -->
+<div id="hearts"></div>
+
+<!-- ═══ HERO ════════════════════════════════════════ -->
+<section id="hero">
+  <p class="label">✦ One Year Together ✦</p>
+  <h1>Happy One Year <h3>(and one month hehehe <3 )</h3>,<br>My Love</h1>
+  <p class="sub">Every moment with you has been a gift. Te quiero mucho!</p>
+  <!-- EDIT the date below -->
+  <div class="date-badge">April 28, 2025 → April 28, 2026</div>
+
+  <!-- GIF as full-bleed background behind hero text -->
+  <div class="kiss-gif-bg">
+    <div class="tenor-gif-embed"
+         data-postid="11816971814746635421"
+         data-share-method="host"
+         data-aspect-ratio="1"
+         data-width="100vw">
+      <a href="https://tenor.com/view/kiss-gif-11816971814746635421">Kiss GIF</a>
+    </div>
+  </div>
+
+  <!-- <a class="click-me-btn"
+     href="https://tenor.com/view/kiss-gif-11816971814746635421"
+     target="_blank" rel="noopener">
+    ♥ &nbsp;Click Me&nbsp; ♥
+  </a> -->
+</section>
+
+<!-- ═══ PUUUNG GIF ══════════════════════════════════ -->
+<section id="puuung-section">
+  <div class="puuung-wrap">
+    <div class="tenor-gif-embed"
+         data-postid="9973640044929896335"
+         data-share-method="host"
+         data-aspect-ratio="0.9"
+         data-width="380px">
+      <a href="https://tenor.com/view/kiss-me-kiss-you-puuung-kiss-puuung-gif-puuung-kissies-hug-kiss-images-gif-9973640044929896335">That's us ♥</a>
+    </div>
+  </div>
+  <p class="puuung-caption">Me and you ♥</p>
+</section>
+
+<hr class="divider" />
+
+<!-- ═══ ITINERARY ════════════════════════════════════ -->
+<section id="itinerary">
+  <h2>✦ Anniversary Plans</h2>
+  <div class="timeline" id="timeline">
+    <!-- EDIT / ADD events below. Copy an .event block to add more. -->
+    <div class="event">
+      <div class="event-time">8:00 AM - 9:00 AM</div>
+      <div class="event-title">Wakey wakey pookie preciosa bootylicious goregous sexy my salvadorian I wanna eat your pupusa let me lick that doe princesa </div>
+      <div class="event-desc">Match Bubu and Dudu + gather picnic small snacks</div>
+    </div>
+
+    <div class="event">
+      <div class="event-time">09:45 AM - 11:00AM</div>
+      <div class="event-title">Our Morning Together</div>
+      <div class="event-desc">Get to Farmers Market.</div>
+    </div>
+
+    <div>
+      <div class="event">
+      <div class="event-time">1:00 PM - 2:30 PM </div>
+      <div class="event-title">Who is Pencil and why is he sharpening?</div>
+      <div class="event-desc">THE MOMENT WE HAVE BEEN FINALLY WAITING FOR PENCIL SHARPENING EVENT!</div>
+    </div>
+
+     <div class="event">
+      <div class="event-time">3:45 PM - 4:45</div>
+      <div class="event-title">Lunch with my girl (ahhhh) @ Banh mi House or D's Banh mi??</div>
+      <div class="event-desc">Baby we gonna eats some bahn mi then Im'a eat your bahn later ;) ... PICNIC TIME</div>
+    </div>
+
+    <div class="event">
+      <div class="event-time">5:10 PM - 7:30 PM</div>
+      <div class="event-title">Sum Chill</div>
+      <div class="event-desc">Sound Wave - the mission is to feed bubu sweet treat... ohh then find a drinky drink for us</div>
+    </div>
+
+    <div class="event">
+      <div class="event-time">8:00 PM - 9:30 PM </div>
+      <div class="event-title">Big back time</div>
+      <div class="event-desc">Ono Hawaiian Plates</div>
+    </div>
+
+    <div class="event">
+      <div class="event-time">10:00 PM</div>
+      <div class="event-title">To Cap It Off</div>
+      <div class="event-desc">End the night with BRKTHROUGH </div>
+    </div>
+
+    <div class="event">
+      <div class="event-time">After hour Bubu and Dudu</div>
+      <div class="event-title">To do list:</div>
+      <div class="event-desc">EACH OTHER </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ═══ SPOTIFY ══════════════════════════════════════ -->
+<section id="spotify-section">
+  <h2>Our Song ✦</h2>
+  <div class="spotify-card">
+    <p>Scan the code to listen to the song that means everything.</p>
+
+    <a id="spotify-link" href="https://open.spotify.com/track/4pteEcX2rHSJXK8XSOtWP8?si=d12d4c31cd8d454e"
+       target="_blank" rel="noopener" title="Open in Spotify">
+      <img id="qr-img"
+        src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=1a0a0f&bgcolor=fff8f9&data=https%3A%2F%2Fopen.spotify.com%2Ftrack%2F4pteEcX2rHSJXK8XSOtWP8%3Fsi%3Dd12d4c31cd8d454e"
+        alt="Spotify QR Code"
+        width="200" height="200"
+        style="border-radius:12px; display:block;" />
+    </a>
+    <div class="spotify-label">Open in Spotify</div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ═══ PHOTO ALBUM ══════════════════════════════════ -->
+<section id="album">
+  <h2>Us ✦ A Year in Photos</h2>
+
+  <!-- ★ ADD MORE PHOTOS HERE — copy a .photo-slot block and change the src ★ -->
+  <div class="photo-grid" id="static-photos">
+    <div class="photo-slot"><img src="images/MOA1.jpeg"       alt="Us ♥" /></div>
+    <div class="photo-slot"><img src="images/IMG_5869.JPG"    alt="Us ♥" /></div>
+    <div class="photo-slot"><img src="images/cachedImage.PNG" alt="Us ♥" /></div>
+    <div class="photo-slot"><img src="images/DSCN3324.jpg"    alt="Us ♥" /></div>
+    <div class="photo-slot"><img src="images/DSCN3609.jpg"    alt="Us ♥" /></div>
+    <div class="photo-slot"><img src="images/IMG_2713.jpg"    alt="Us ♥" /></div>
+    <div class="photo-slot"><img src="images/IMG_6338.jpg"    alt="Us ♥" /></div>
+    <div class="photo-slot"><img src="images/IMG_6632.jpg"    alt="Us ♥" /></div>
+    <div class="photo-slot"><img src="images/IMG_7860.jpg"    alt="Us ♥" /></div>
+    <div class="photo-slot"><img src="images/IMG_5044.jpg"    alt="Us ♥" /></div>
+  </div>
+</section>
+
+<footer>Made with love ♥ — for you, always.</footer>
+
+<!-- Tenor embed script (powers the Puuung GIF) -->
+<script async src="https://tenor.com/embed.js"></script>
+
+<!-- Capy GIF — top-left corner -->
+<div id="capy-corner">
+  <div class="tenor-gif-embed"
+       data-postid="11391856023262732815"
+       data-share-method="host"
+       data-aspect-ratio="0.993289"
+       data-width="110px">
+    <a href="https://tenor.com/view/drooling-capy-gif-11391856023262732815">Drooling Capy GIF</a>
+  </div>
+</div>
+
+<!-- Capy GIF — bottom-left corner -->
+<div id="capy-corner-bl">
+  <div class="tenor-gif-embed"
+       data-postid="16032924011167350191"
+       data-share-method="host"
+       data-aspect-ratio="1"
+       data-width="110px">
+    <a href="https://tenor.com/view/drooling-capy-droolingcapy-capy-gif-16032924011167350191">Drooling Capy GIF</a>
+  </div>
+</div>
+
+<!-- Corner bears decoration — save your bear+panda image as bear-panda.png in this folder -->
+<img id="corner-bears" src="Bubu-and-Dudu.png" alt="Us ♥"
+     title="That's us! ♥"
+     onerror="this.style.display='none'" />
+
+<script>
+  /* ── Floating hearts ── */
+  const HEARTS = ['♥','❤','💕','💗','💓'];
+  const container = document.getElementById('hearts');
+  for (let i = 0; i < 18; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = HEARTS[Math.floor(Math.random() * HEARTS.length)];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.animationDuration = (8 + Math.random() * 12) + 's';
+    h.style.animationDelay = (Math.random() * 14) + 's';
+    h.style.fontSize = (.8 + Math.random() * 1.2) + 'rem';
+    container.appendChild(h);
+  }
+
+
+</script>
+</body>
+</html>
